@@ -405,7 +405,43 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+    let differ = endDate - startDate;
+    if (differ <= 45 * 1000) { return 'a few seconds ago' }
+    else if (differ <= 90 * 1000) { return 'a minute ago' }
+    else if (differ <= 45 * 60 * 1000) {
+        if (differ / (1000 * 60) - Math.floor(differ / (1000 * 60)) > 0.5) {
+            return `${Math.ceil(differ / (1000 * 60))} minutes ago`
+        }
+        else return `${Math.floor(differ / (1000 * 60))} minutes ago`
+    }
+    else if (differ <= 90 * 60 * 1000) { return 'an hour ago' }
+    else if (differ <= 22 * 60 * 60 * 1000) {
+        if (differ / (1000 * 60 * 60) - Math.floor(differ / (1000 * 60 * 60)) > 0.5) {
+            return `${Math.ceil(differ / (1000 * 60 * 60))} hours ago`
+        }
+        else return `${Math.floor(differ / (1000 * 60 * 60))} hours ago`
+    }
+    else if (differ <= 36 * 60 * 60 * 1000) { return 'a day ago' }
+    else if (differ <= 25 * 24 * 60 * 60 * 1000) {
+        if (differ / (1000 * 60 * 60 * 24) - Math.floor(differ / (1000 * 60 * 60 * 24)) > 0.5) {
+            return `${Math.ceil(differ / (1000 * 60 * 60 * 24))} days ago`
+        }
+        else return `${Math.floor(differ / (1000 * 60 * 60 * 24))} days ago`
+    }
+    else if (differ <= 45 * 24 * 60 * 60 * 1000) { return `a month ago` }
+    else if (differ <= 345 * 24 * 60 * 60 * 1000) {
+        if (differ / (1000 * 60 * 60 * 24 * 30) - Math.floor(differ / (1000 * 60 * 60 * 24 * 30)) > 0.5) {
+            return `${Math.ceil(differ / (1000 * 60 * 60 * 24 * 30))} months ago`
+        }
+        else return `${Math.floor(differ / (1000 * 60 * 60 * 24 * 30))} months ago`
+    }
+    else if (differ <= 545 * 24 * 60 * 60 * 1000) { return `a year ago` }
+    else if (differ >= 545 * 24 * 60 * 60 * 1000) {
+        if (differ / (1000 * 60 * 60 * 24 * 365) - Math.floor(differ / (1000 * 60 * 60 * 24 * 365)) > 0.5) {
+            return `${Math.ceil(differ / (1000 * 60 * 60 * 24 * 365))} years ago`
+        }
+        else return `${Math.floor(differ / (1000 * 60 * 60 * 24 * 365))} years ago`
+    }
 }
 
 
@@ -495,7 +531,18 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+    let res = new Array(m1.length);
+    for (let i = 0; i < res.length; i++) {
+        res[i] = new Array(m2[i].length); {
+            for (let j = 0; j < m1.length; j++) {
+                res[i][j] = 0;
+                for (let k = 0; k < m2.length; k++) {
+                    res[i][j] += m1[i][k] * m2[k][j];
+                }
+            }
+        }
+    }
+    return res;
 }
 
 
