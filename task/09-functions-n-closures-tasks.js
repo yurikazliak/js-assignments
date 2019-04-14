@@ -177,12 +177,8 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(fn) {
-    let args_first = [arguments];
-    return function () {
-        let allArgs = array.concat([arguments], args_first);
-        return fn.apply(this, ...allArgs);
-    };
+function partialUsingArguments(fn, ...rest) {
+    return fn.bind(null, ...rest);
 }
 
 
